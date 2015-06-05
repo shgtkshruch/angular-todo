@@ -37,13 +37,13 @@ html(lang="ja")
         .btn-group
           button.btn.btn-default.active(ng-click="changeFilter()" ng-class="{active: !currentFilter}")
             | 全部
-            span.badge {{ todos.length }}
+            span.badge {{ allCount }}
           button.btn.btn-default(ng-click="changeFilter(filter.remaining)" ng-class="{avtive: currentFilter == filter.remaining}")
             | 未了
-            span.badge n
+            span.badge {{ remainingCount }}
           button.btn.btn-default(ng-click="changeFilter(filter.done)" ng-class="active: currentFilter == filter.done")
             | 完了
-            span.badge n
+            span.badge {{ doneCount }}
           .btn-group
             button.btn.btn-danger 完了アイテムを全て削除
 

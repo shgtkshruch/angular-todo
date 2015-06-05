@@ -30,4 +30,22 @@ angular.module 'App', []
       $scope.doneCount = where(todos, $scope.filter.done).length
       $scope.remainingCount = length - $scope.doneCount
     , true
+
+    originalTitle = null
+    $scope.editing = null
+
+    $scope.editTodo = (todo) ->
+      originalTitle = todo.title
+      $scope.editing = todo
+
+    $scope.doneEdit = (todoForm) ->
+      if todoForm.$invalid
+        $scope.editing.title = orig
+      $scope.editing = originalTitle = null
+  ]
+  .directive 'mySelect', [->
+    (scope, $el, attrs) ->
+      scope.$watch attrs.mySelect, (val) ->
+        if val
+          $el[0].select()
   ]

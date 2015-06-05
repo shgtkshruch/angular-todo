@@ -16,43 +16,45 @@ html(lang="ja")
 
     link(rel='stylesheet', href='styles/style.css', media='all')
   body(ng-app="App")
-    .location-bar
-    .container
-      .page-header
-        h1 ToDo
 
-      form.input-group.input-group-lg
-        input.form-control.input-lg(type="text" name="" required placeholder="新しい要件を入力")
-        span.input-group-btn
-          button.btn.btn-default(type="submit") 追加
+    div(ng-controller="MainController")
 
-      hr
+      .location-bar
+      .container
+        .page-header
+          h1 ToDo
 
-      .btn-toolbar
+        form.input-group.input-group-lg(ng-submit="addTodo()")
+          input.form-control.input-lg(type="text" name="" required placeholder="新しい要件を入力")
+          span.input-group-btn
+            button.btn.btn-default(type="submit") 追加
+
+        hr
+
+        .btn-toolbar
+          .btn-group
+            button.btn.btn-success 全てを完了／未了
         .btn-group
-          button.btn.btn-success 全てを完了／未了
-      .btn-group
-        button.btn.btn-default.active
-          | 全部
-          span.badge 3
-        button.btn.btn-default
-          | 未了
-          span.badge 2
-        button.btn.btn-default
-          | 完了
-          span.badge 1
-        .btn-group
-          button.btn.btn-danger 完了アイテムを全て削除
+          button.btn.btn-default.active
+            | 全部
+            span.badge {{ todos.length }}
+          button.btn.btn-default
+            | 未了
+            span.badge 2
+          button.btn.btn-default
+            | 完了
+            span.badge 1
+          .btn-group
+            button.btn.btn-danger 完了アイテムを全て削除
 
-      hr
+        hr
 
-      ul.list-unstyled
-        each val, i in ['未了のToDo', '完了したToDo', '編集中のToDo']
-          li.todo-item
+        ul.list-unstyled
+          li.todo-item(ng-repeat="todo in todos")
             form.input-group.input-group-lg
               label.input-group-addon
                 input(type="checkbox" name="")
-              p.form-control.input-lg.todo-title= val
+              p.form-control.input-lg.todo-title {{ todo.title }}
               span.input-group-btn.del-btn
                 button.btn.btn-danger(type="reset") 削除
 

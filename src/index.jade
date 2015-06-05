@@ -35,22 +35,22 @@ html(lang="ja")
           .btn-group
             button.btn.btn-success 全てを完了／未了
         .btn-group
-          button.btn.btn-default.active
+          button.btn.btn-default.active(ng-click="changeFilter()" ng-class="{active: !currentFilter}")
             | 全部
             span.badge {{ todos.length }}
-          button.btn.btn-default
+          button.btn.btn-default(ng-click="changeFilter(filter.remaining)" ng-class="{avtive: currentFilter == filter.remaining}")
             | 未了
-            span.badge 2
-          button.btn.btn-default
+            span.badge n
+          button.btn.btn-default(ng-click="changeFilter(filter.done)" ng-class="active: currentFilter == filter.done")
             | 完了
-            span.badge 1
+            span.badge n
           .btn-group
             button.btn.btn-danger 完了アイテムを全て削除
 
         hr
 
         ul.list-unstyled
-          li.todo-item(ng-repeat="todo in todos" ng-class="{done: todo.done}")
+          li.todo-item(ng-repeat="todo in todos | filter:currentFilter" ng-class="{done: todo.done}")
             form.input-group.input-group-lg
               label.input-group-addon
                 input(type="checkbox" name="" ng-model="todo.done")
